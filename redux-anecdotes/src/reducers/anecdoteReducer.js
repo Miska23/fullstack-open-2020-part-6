@@ -1,3 +1,5 @@
+//TODO: refactor sorting functionality
+
 const anecdotesAtStart = [
   'If it hurts, do it more often',
   'Adding manpower to a late software project makes it later!',
@@ -17,13 +19,45 @@ const asObject = (anecdote) => {
   }
 }
 
+export const addVote = (id) => {
+  return {
+    type: 'ADD_VOTE',
+    data: {
+      id
+    }
+  }
+}
+
+export const createAnecdote = (content) => {
+  return {
+    type: 'CREATE_ANECDOTE',
+    data: {
+      content
+    }
+  }
+}
+
 const initialState = anecdotesAtStart.map(asObject)
 
 const reducer = (state = initialState, action) => {
-  console.log('state now: ', state)
-  console.log('action', action)
-
-  return state
+  switch (action.type) {
+  case 'ADD_VOTE':
+  {
+    const anecdoteToChange = state.find(anecdote => anecdote.id === action.data.id)
+    const changedAnecdote = { ...anecdoteToChange, votes: anecdoteToChange.votes + 1 }
+    return state
+      .map(anecdote => anecdote.id !== action.data.id ? anecdote : changedAnecdote)
+      .sort((a, b) => b.votes - a.votes)
+  }
+  case 'CREATE_ANECDOTE':
+  {
+    return state
+      .concat(asObject(action.data.content))
+      .sort((a, b) => b.votes - a.votes)
+  }
+  default:
+    return state.sort((a, b) => b.votes - a.votes)
+  }
 }
 
 export default reducer

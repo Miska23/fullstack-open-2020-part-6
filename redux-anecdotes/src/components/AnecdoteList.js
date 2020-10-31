@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import * as actions from '../store/actions/anecdotes'
+import * as notificationActions from '../store/actions/notification'
 import Anecdote from './Anecdote'
 
 const AnecdoteList = ({ dispatch }) => {
@@ -9,10 +10,11 @@ const AnecdoteList = ({ dispatch }) => {
     return anecdotesInState.sort((a, b) => b.votes - a.votes)
   }
 
-  const anecdotes = useSelector(state => sortByVotes(state))
+  const anecdotes = useSelector(state => sortByVotes(state.anecdotes))
 
-  const vote = (id) => {
-    dispatch(actions.addVote(id))
+  const vote = (anecdote) => {
+    dispatch(actions.addVote(anecdote.id))
+    dispatch(notificationActions.setNotification(`You voted: "${anecdote.content}"`))
   }
 
   return (

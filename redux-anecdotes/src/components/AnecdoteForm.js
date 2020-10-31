@@ -1,5 +1,6 @@
 import React from 'react'
 import * as actions from '../store/actions/anecdotes'
+import * as notificationActions from '../store/actions/notification'
 
 const AnecdoteForm = ({ dispatch }) => {
 
@@ -8,6 +9,7 @@ const AnecdoteForm = ({ dispatch }) => {
     const content = event.target.anecdote.value
     event.target.anecdote.value = ''
     dispatch(actions.createAnecdote(content))
+    dispatch(notificationActions.setNotification(`You added anecdote: "${content}"`))
   }
 
   return  (

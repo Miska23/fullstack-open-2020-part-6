@@ -17,9 +17,6 @@ const store = createStore(
   composeWithDevTools()
 )
 
-store.subscribe(() => console.log('Miska:', store.getState()))
-
-
 ReactDOM.render(
   <Provider store={store}>
     <App />

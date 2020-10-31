@@ -4,7 +4,6 @@ export const initialState = {
   content: null
 }
 
-
 const notificationReducer = (state = initialState, action) => {
   switch (action.type) {
   case actionTypes.SET_NOTIFICATION:
@@ -13,7 +12,7 @@ const notificationReducer = (state = initialState, action) => {
   }
   case actionTypes.CLEAR_NOTIFICATION:
   {
-    return { ...state, content: null }
+    return { ...state, content: '' }
   }
   default:
     return state

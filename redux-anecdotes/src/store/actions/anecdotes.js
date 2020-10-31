@@ -18,3 +18,17 @@ export const createAnecdote = (content) => {
   }
 }
 
+export const setFilter = (value) => {
+  return {
+    type: actionTypes.SET_FILTER,
+    data: {
+      value
+    }
+  }
+}
+export const clearFilter = () => {
+  return {
+    type: actionTypes.CLEAR_FILTER,
+  }
+}
+

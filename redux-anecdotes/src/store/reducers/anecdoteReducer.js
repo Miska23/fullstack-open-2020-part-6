@@ -1,4 +1,4 @@
-//TODO: refactor sorting functionality
+import * as actionTypes from '../actions/actionTypes'
 
 const anecdotesAtStart = [
   'If it hurts, do it more often',
@@ -19,45 +19,25 @@ const asObject = (anecdote) => {
   }
 }
 
-export const addVote = (id) => {
-  return {
-    type: 'ADD_VOTE',
-    data: {
-      id
-    }
-  }
-}
+export const initialState = anecdotesAtStart.map(asObject)
 
-export const createAnecdote = (content) => {
-  return {
-    type: 'CREATE_ANECDOTE',
-    data: {
-      content
-    }
-  }
-}
-
-const initialState = anecdotesAtStart.map(asObject)
-
-const reducer = (state = initialState, action) => {
+const anecdoteReducer = (state = initialState, action) => {
   switch (action.type) {
-  case 'ADD_VOTE':
+  case actionTypes.ADD_VOTE:
   {
     const anecdoteToChange = state.find(anecdote => anecdote.id === action.data.id)
     const changedAnecdote = { ...anecdoteToChange, votes: anecdoteToChange.votes + 1 }
     return state
       .map(anecdote => anecdote.id !== action.data.id ? anecdote : changedAnecdote)
-      .sort((a, b) => b.votes - a.votes)
   }
-  case 'CREATE_ANECDOTE':
+  case actionTypes.CREATE_ANECDOTE:
   {
     return state
       .concat(asObject(action.data.content))
-      .sort((a, b) => b.votes - a.votes)
   }
   default:
-    return state.sort((a, b) => b.votes - a.votes)
+    return state
   }
 }
 
-export default reducer
+export default anecdoteReducer

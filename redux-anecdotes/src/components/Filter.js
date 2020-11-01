@@ -1,5 +1,5 @@
 import React from 'react'
-import * as actions from '../store/actions/anecdotes'
+import * as actions from '../store/actions/filter'
 
 const Filter = ({ dispatch }) => {
 

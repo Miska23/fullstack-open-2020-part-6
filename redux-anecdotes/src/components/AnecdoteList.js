@@ -10,7 +10,19 @@ const AnecdoteList = ({ dispatch }) => {
     return anecdotesInState.sort((a, b) => b.votes - a.votes)
   }
 
-  const anecdotes = useSelector(state => sortByVotes(state.anecdotes))
+  const anecdotes = useSelector(state => {
+    if (state.filter === 'ALL') {
+      return sortByVotes(state.anecdotes)
+    } else {
+      //* palautetaan taulukko siten että käydään läpi jokaisen olion content-kentässä oleva string siten että
+      //* etsitään stringistä indeksiä jossa on filterin arvona oleva string. Jos mitään ei löydy, palautetaan -1,
+      //* mutta tämän varalta etsinnän tulosta verrataan kyseiseen lukuun, jolloin uuteen taulukkoon ei tule mitään
+      //* jos missään content-kentässä ei ole osumia (?)
+      const filtered = state.anecdotes.filter(anecdote => anecdote.content.toLowerCase().indexOf(state.filter.toLowerCase())>-1)
+      return sortByVotes(filtered)
+    }
+
+  })
 
   const vote = (anecdote) => {
     dispatch(actions.addVote(anecdote.id))

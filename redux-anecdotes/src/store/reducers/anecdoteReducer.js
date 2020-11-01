@@ -35,18 +35,6 @@ const anecdoteReducer = (state = initialState, action) => {
     return state
       .concat(asObject(action.data.content))
   }
-  case actionTypes.SET_FILTER:
-  {
-    /* const filteredAnecdotes = action.data.value.length === 1 ?
-      state :
-    // countries.filter(c => c.name.toLowerCase().indexOf(filter.toLowerCase())>-1 ) */
-    const filteredAnecdotes = [...state.filter(anecdote => anecdote.content.toLowerCase().indexOf(action.data.value.toLowerCase())>-1)]
-    return filteredAnecdotes
-  }
-  case actionTypes.CLEAR_FILTER:
-  {
-    return state
-  }
   default:
     return state
   }

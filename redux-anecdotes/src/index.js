@@ -5,10 +5,12 @@ import { Provider } from 'react-redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import App from './App'
 import anecdoteReducer from './store/reducers/anecdoteReducer'
+import filterReducer from './store/reducers/filterReducer'
 import notificationReducer from './store/reducers/notificationReducer'
 
 const reducer = combineReducers({
   anecdotes: anecdoteReducer,
+  filter: filterReducer,
   notification: notificationReducer
 })
 

@@ -1,10 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import * as actions from '../store/actions/anecdotes'
 import * as notificationActions from '../store/actions/notification'
+import anecdoteService from '../services/anecdotes'
 import Anecdote from './Anecdote'
 
 const AnecdoteList = ({ dispatch }) => {
+
+  useEffect(() => {
+    anecdoteService
+      .getAll().then(anecdotes => dispatch(actions.initAnecdotes(anecdotes)))
+  }, [dispatch])
 
   const sortByVotes = (anecdotesInState) => {
     return anecdotesInState.sort((a, b) => b.votes - a.votes)
@@ -30,7 +36,6 @@ const AnecdoteList = ({ dispatch }) => {
     setTimeout(() => {
       dispatch(notificationActions.clearNotification())
     }, 5000)
-
   }
 
   return (

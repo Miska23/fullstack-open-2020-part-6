@@ -1,3 +1,4 @@
+export const INIT_ANECDOTES = 'INIT_ANECDOTES'
 export const ADD_VOTE = 'ADD_VOTE'
 export const CREATE_ANECDOTE = 'CREATE_ANECDOTE'
 

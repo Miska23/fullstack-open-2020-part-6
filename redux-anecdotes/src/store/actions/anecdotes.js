@@ -9,12 +9,17 @@ export const addVote = (id) => {
   }
 }
 
-export const createAnecdote = (content) => {
+export const createAnecdote = (data) => {
   return {
     type: actionTypes.CREATE_ANECDOTE,
-    data: {
-      content
-    }
+    data
+  }
+}
+
+export const initAnecdotes = (data) => {
+  return {
+    type: actionTypes.INIT_ANECDOTES,
+    data
   }
 }
 

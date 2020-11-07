@@ -10,10 +10,6 @@ const notificationReducer = (state = initialState, action) => {
   {
     return { ...state, content: action.data.content }
   }
-  case actionTypes.CLEAR_NOTIFICATION:
-  {
-    return { ...state, content: '' }
-  }
   default:
     return state
   }

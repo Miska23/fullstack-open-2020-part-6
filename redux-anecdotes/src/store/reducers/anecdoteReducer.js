@@ -1,6 +1,5 @@
 import * as actionTypes from '../actions/actionTypes'
 
-
 const asObject = (data) => {
   return {
     content: data.content,
@@ -15,17 +14,16 @@ const anecdoteReducer = (state = [], action) => {
   {
     return action.data
   }
+  case actionTypes.CREATE_ANECDOTE:
+  {
+    return state.concat(asObject(action.data))
+  }
   case actionTypes.ADD_VOTE:
   {
     const anecdoteToChange = state.find(anecdote => anecdote.id === action.data.id)
     const changedAnecdote = { ...anecdoteToChange, votes: anecdoteToChange.votes + 1 }
     return state
       .map(anecdote => anecdote.id !== action.data.id ? anecdote : changedAnecdote)
-  }
-  case actionTypes.CREATE_ANECDOTE:
-  {
-    return state
-      .concat(asObject(action.data))
   }
   default:
     return state

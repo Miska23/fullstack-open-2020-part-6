@@ -1,13 +1,14 @@
 import React from 'react'
-import * as actions from '../store/actions/filter'
+import { connect } from 'react-redux'
+import * as filterActions from '../store/actions/filter'
 
-const Filter = ({ dispatch }) => {
+const Filter = (props) => {
 
   const handleChange = (event) => {
     if (event.target.value.length === 0) {
-      dispatch(actions.clearFilter())
+      props.clearFilter()
     } else {
-      dispatch(actions.setFilter(event.target.value))
+      props.setFilter(event.target.value)
     }
   }
   const style = {
@@ -21,4 +22,15 @@ const Filter = ({ dispatch }) => {
   )
 }
 
-export default Filter
+const mapDispatchToProps = (dispatch) => {
+  return {
+    clearFilter: () => {
+      dispatch(filterActions.clearFilter())
+    },
+    setFilter: (value) => {
+      dispatch(filterActions.setFilter(value))
+    }
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Filter)

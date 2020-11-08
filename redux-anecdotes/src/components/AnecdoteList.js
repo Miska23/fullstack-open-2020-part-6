@@ -14,10 +14,6 @@ const AnecdoteList = (props) => {
     if (props.filter === 'ALL') {
       return sortByVotes(props.anecdotes)
     } else {
-      //* palautetaan taulukko siten että käydään läpi jokaisen olion content-kentässä oleva string siten että
-      //* etsitään stringistä indeksiä jossa on filterin arvona oleva string. Jos mitään ei löydy, palautetaan -1,
-      //* mutta tämän varalta etsinnän tulosta verrataan kyseiseen lukuun, jolloin uuteen taulukkoon ei tule mitään
-      //* jos missään content-kentässä ei ole osumia (?)
       const filtered = props.anecdotes.filter(anecdote => anecdote.content.toLowerCase().indexOf(props.filter.toLowerCase())>-1)
       return sortByVotes(filtered)
     }
